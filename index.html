@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятори для телефону</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Калькулятор витрат на поїздку</h1>
+        <input type="number" id="pal" placeholder="Введіть витрату палива (л/100км)">
+        <input type="number" id="cost" placeholder="Введіть ціну палива (грн/літр)">
+        <input type="number" id="distance" placeholder="Введіть довжину маршруту (км)">
+        <button onclick="calculateTripCost()">Розрахувати вартість поїздки</button>
+        <div class="result" id="tripCostResult"></div>
+        
+        <h1>Інші калькулятори</h1>
+        <!-- Можна додати інші калькулятори сюди -->
+        <input type="number" id="number1" placeholder="Перше число">
+        <input type="number" id="number2" placeholder="Друге число">
+        <button onclick="calculateSum()">Додати числа</button>
+        <div class="result" id="sumResult"></div>
+    </div>
+
+    <script>
+        function calculateTripCost() {
+            const pal = parseFloat(document.getElementById('pal').value);
+            const cost = parseFloat(document.getElementById('cost').value);
+            const distance = parseFloat(document.getElementById('distance').value);
+            
+            if (isNaN(pal) || isNaN(cost) || isNaN(distance)) {
+                document.getElementById('tripCostResult').textContent = "Будь ласка, введіть всі дані!";
+                return;
+            }
+
+            const palUse = (pal / 100) * distance; 
+            const tripCost = palUse * cost;
+
+            document.getElementById('tripCostResult').textContent = `Вартість поїздки: ${tripCost.toFixed(2)} грн`;
+        }
+
+        function calculateSum() {
+            const num1 = parseFloat(document.getElementById('number1').value);
+            const num2 = parseFloat(document.getElementById('number2').value);
+
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById('sumResult').textContent = "Будь ласка, введіть обидва числа!";
+                return;
+            }
+
+            const sum = num1 + num2;
+            document.getElementById('sumResult').textContent = `Сума: ${sum}`;
+        }
+    </script>
+</body>
+</html>
